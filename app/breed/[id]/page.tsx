@@ -1,17 +1,17 @@
-import { fetchRandomDogBreeds } from '@/services/dogApi';
-import { fetchRandomCatBreeds } from '@/services/catApi';
+import { fetchRandomDogBreeds, Breed as DogBreed } from '../../../services/dogApi';
+import { fetchRandomCatBreeds, Breed as CatBreed } from '../../../services/catApi';
 
 export default async function BreedPage({ params }: { params: { id: string } }) {
     const { id } = params;
 
-    // Поиск породы сначала среди собак, потом среди кошек
-    const dogBreeds = await fetchRandomDogBreeds();
-    const catBreeds = await fetchRandomCatBreeds();
-    console.log(dogBreeds)
+    const dogBreeds: DogBreed[] = await fetchRandomDogBreeds();
+    const catBreeds: CatBreed[] = await fetchRandomCatBreeds();
 
-    console.log(+id)
+    // Объединяем массивы пород собак и кошек
+    const allBreeds: (DogBreed | CatBreed)[] = [...dogBreeds, ...catBreeds];
 
-    let breed = dogBreeds.find((breed) => breed.id === +id) || catBreeds.find((breed) => breed.id === +id);
+    // Поиск породы по ID
+    let breed = allBreeds.find((breed) => breed.id === +id);
 
     if (!breed) {
         return <div>Порода не найдена</div>;
