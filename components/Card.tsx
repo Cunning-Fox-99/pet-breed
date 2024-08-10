@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const Card = ({ breed }) => {
+const Card = ({ breed:any }) => {
 
     return (
         <Link href={`/breed/${breed.id}`}>
