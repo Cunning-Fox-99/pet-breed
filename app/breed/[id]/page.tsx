@@ -7,11 +7,12 @@ export default async function BreedPage({ params }: { params: { id: string } }) 
     const dogBreeds: DogBreed[] = await fetchRandomDogBreeds();
     const catBreeds: CatBreed[] = await fetchRandomCatBreeds();
 
+    const breedId = Number(id);
     // Объединяем массивы пород собак и кошек
     const allBreeds: (DogBreed | CatBreed)[] = [...dogBreeds, ...catBreeds];
 
     // Поиск породы по ID
-    let breed = allBreeds.find((breed) => breed.id === +id);
+    let breed = allBreeds.find((breed) => breed.id === breedId);
 
     if (!breed) {
         return <div>Порода не найдена</div>;
