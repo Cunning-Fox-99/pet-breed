@@ -12,7 +12,7 @@ export default async function BreedPage({ params }: { params: { id: string } }) 
     const allBreeds: (DogBreed | CatBreed)[] = [...dogBreeds, ...catBreeds];
 
     // Поиск породы по ID
-    let breed = allBreeds.find((breed) => breed.id === breedId);
+    let breed = allBreeds.find((breed:any) => breed.id === breedId);
 
     if (!breed) {
         return <div>Порода не найдена</div>;
